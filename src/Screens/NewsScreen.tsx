@@ -64,9 +64,9 @@ const NewsPage: React.FC = () => {
       );
 
       const newAccessToken: string = response.data.accessToken;
-      console.log('New Access Token:', newAccessToken); // Logging the new access token
+      console.log('New Access Token:', newAccessToken);
       dispatch(setAccessToken(newAccessToken));
-      setRefreshCount(prevCount => prevCount + 1); // Increment refresh count
+      setRefreshCount(prevCount => prevCount + 1);
       return newAccessToken;
     } catch (error: any) {
       console.error('Error refreshing access token:', error);

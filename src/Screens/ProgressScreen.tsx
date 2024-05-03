@@ -93,10 +93,9 @@ const ProgressScreen: React.FC = () => {
 
   const handleRefresh = () => {
     setRefreshing(true);
-    // Fetch updated data here
     setTimeout(() => {
       setRefreshing(false);
-    }, 1000); // Simulating a delay, replace with actual fetch
+    }, 1000);
   };
 
   return (

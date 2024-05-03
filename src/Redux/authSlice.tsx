@@ -79,7 +79,6 @@ export const {
   logout,
 } = authSlice.actions;
 
-// Redux selectors
 export const selectAccessToken = (state: {auth: AuthState}) =>
   state.auth.accessToken;
 export const selectnewAccessToken = (state: {auth: AuthState}) =>

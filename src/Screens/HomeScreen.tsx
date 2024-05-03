@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logoContainer}>
-        <Image source={require('../assets/logo192.png')} style={styles.logo} />
+        <Image source={require('../assets/jackson.png')} style={styles.logo} />
       </View>
       <Text style={styles.welcomeText}>Welcome to J Expences</Text>
       <Text style={styles.descriptionText}>
