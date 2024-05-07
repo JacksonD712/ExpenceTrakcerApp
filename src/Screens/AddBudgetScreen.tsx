@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ScrollView, Text, RefreshControl, Image} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectEmail} from '../Redux/authSlice';
-import {fetchUserData, addBudgetData} from '../api/api2';
+import {fetchUserData, addBudgetData} from '../Api/api2';
 import BudgetForm from '../Components/Forms/BudgetForm';
 import UserDataDisplay from '../Components/Forms/UserDataDisplay';
 import styles from '../Style/AddBudgetStyle';

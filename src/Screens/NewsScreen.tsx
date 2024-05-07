@@ -15,9 +15,10 @@ import {
   logout,
 } from '../Redux/authSlice';
 import PostItem from '../Components/PostItems';
-import {getPosts} from '../api/api';
+import {getPosts} from '../Api/api';
 import axios from 'axios';
 import styles from '../Style/NewsScreenStyle';
+import Config from 'react-native-config';
 
 interface Post {
   _id: string;
@@ -33,12 +34,13 @@ const NewsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [hasNextPage, setHasNextPage] = useState<boolean>(false);
-  const [refreshCount, setRefreshCount] = useState<number>(0); // Add refresh count state
+  const [refreshCount, setRefreshCount] = useState<number>(0);
   const accessToken = useSelector(selectAccessToken);
   const refreshToken = useSelector(selectRefreshToken);
   const dispatch = useDispatch();
 
   const refreshAccessToken = async () => {
+    const api = Config.API_URL;
     try {
       if (refreshCount >= 3) {
         dispatch(logout());
@@ -55,13 +57,10 @@ const NewsPage: React.FC = () => {
         return null;
       }
 
-      const response = await axios.post(
-        'https://backend-practice.euriskomobility.me/refresh-token',
-        {
-          refreshToken: refreshToken,
-          token_expires_in: '0.3m',
-        },
-      );
+      const response = await axios.post(`${api}refresh-token`, {
+        refreshToken: refreshToken,
+        token_expires_in: '0.3m',
+      });
 
       const newAccessToken: string = response.data.accessToken;
       console.log('New Access Token:', newAccessToken);

@@ -1,10 +1,8 @@
-// api.ts
+import {mockapi} from './api2';
 
 export const fetchBudgetAndTime = async (email: string) => {
   try {
-    const response = await fetch(
-      `https://65fef466b2a18489b386cd90.mockapi.io/api/v1/Expence?Email=${email}`,
-    );
+    const response = await fetch(`${mockapi}Expence?Email=${email}`);
     const data = await response.json();
     const userData = data.find((item: any) => item.Email === email);
     return userData;
@@ -19,9 +17,7 @@ export const fetchExpenses = async (
   selectedDay: number | null,
 ) => {
   try {
-    const response = await fetch(
-      `https://65fef466b2a18489b386cd90.mockapi.io/api/v1/Exp?Email=${email}`,
-    );
+    const response = await fetch(`${mockapi}Exp?Email=${email}`);
     const data = await response.json();
     const dayExpenses = data.filter((item: any) => item.Day === selectedDay);
     return dayExpenses;

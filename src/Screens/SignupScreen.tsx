@@ -4,6 +4,7 @@ import Input from '../Components/Inputs/input';
 import Button from '../Components/Buttons/Button';
 import {useNavigation} from '@react-navigation/native';
 import styles from '../Style/SignUpScreenstyle';
+import Config from 'react-native-config';
 
 const SignupScreen = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ const SignupScreen = () => {
   const [ageChecked, setAgeChecked] = useState(false);
   const [privacyPolicyChecked, setPrivacyPolicyChecked] = useState(false);
   const navigation = useNavigation();
-
+  const api = Config.API_URL;
   const handleSignup = async () => {
     try {
       if (!ageChecked) {
@@ -41,20 +42,17 @@ const SignupScreen = () => {
         return;
       }
 
-      const response = await fetch(
-        'https://backend-practice.euriskomobility.me/signup',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-            token_expires_in: '30m',
-          }),
+      const response = await fetch(`${api}signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          token_expires_in: '30m',
+        }),
+      });
 
       if (response.ok) {
         console.log('Signup successful');

@@ -1,15 +1,13 @@
 import {Alert} from 'react-native';
+import {mockapi} from './api2';
 
-// api.js
 export const fetchData = async (
   email: any,
   setBudgetAndTime: (arg0: any) => void,
   setRefreshing: (arg0: boolean) => void,
 ) => {
   try {
-    const response = await fetch(
-      `https://65fef466b2a18489b386cd90.mockapi.io/api/v1/Expence?Email=${email}`,
-    );
+    const response = await fetch(`${mockapi}Expence?Email=${email}`);
     if (response.ok) {
       const data = await response.json();
       const filteredData = data.map((item: {Budget: any; Time: any}) => ({
@@ -41,21 +39,18 @@ export const saveExpense = async (
   }
 
   try {
-    const response = await fetch(
-      `https://65fef466b2a18489b386cd90.mockapi.io/api/v1/Exp?Email=${email}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          Categories: category,
-          Price: parseFloat(price),
-          Email: email,
-          Day: selectedDay,
-        }),
+    const response = await fetch(`${mockapi}Exp?Email=${email}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({
+        Categories: category,
+        Price: parseFloat(price),
+        Email: email,
+        Day: selectedDay,
+      }),
+    });
     if (response.ok) {
       console.log('Expense saved successfully');
       setCategory('');

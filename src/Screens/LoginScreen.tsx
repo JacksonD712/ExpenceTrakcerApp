@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import Input from '../Components/Inputs/input';
 import Button from '../Components/Buttons/Button';
 import styles from '../Style/LoginScreenStyle';
+import Config from 'react-native-config';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -21,20 +22,18 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     try {
       if (email && password) {
-        const response = await fetch(
-          'https://backend-practice.euriskomobility.me/login',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              email: email,
-              password: password,
-              token_expires_in: '0.5m',
-            }),
+        const api = Config.API_URL;
+        const response = await fetch(`${api}login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            token_expires_in: '0.5m',
+          }),
+        });
 
         if (response.ok) {
           console.log('Login successful');

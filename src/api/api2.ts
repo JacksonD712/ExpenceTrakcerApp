@@ -1,4 +1,7 @@
 import {setUserData} from '../Redux/authSlice';
+import Config from 'react-native-config';
+
+export const mockapi = Config.API_MOCK;
 
 export const fetchUserData = async (
   email: any,
@@ -6,9 +9,7 @@ export const fetchUserData = async (
   setMode: (arg0: string) => void,
 ) => {
   try {
-    const response = await fetch(
-      `https://65fef466b2a18489b386cd90.mockapi.io/api/v1/Expence?Email=${email}`,
-    );
+    const response = await fetch(`${mockapi}Expence?Email=${email}`);
     if (response.ok) {
       const data = await response.json();
       setUserData(data);
@@ -32,16 +33,13 @@ export const addBudgetData = async (
   const newBudgetData = {Budget: budget, Email: email, Work: work, Time: time};
 
   try {
-    const response = await fetch(
-      `https://65fef466b2a18489b386cd90.mockapi.io/api/v1/Expence?Email=${email}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newBudgetData),
+    const response = await fetch(`${mockapi}Expence?Email=${email}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify(newBudgetData),
+    });
     const data = await response.json();
     console.log('Success:', data);
     setMode('view');

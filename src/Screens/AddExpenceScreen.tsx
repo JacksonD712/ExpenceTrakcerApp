@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectEmail} from '../Redux/authSlice';
-import {fetchData, saveExpense} from '../api/expenceapi';
+import {fetchData, saveExpense} from '../Api/expenceapi';
 import styles from '../Style/AddExpenceStyle';
 import ModalContent from '../Components/Modal/ModalContent';
 
